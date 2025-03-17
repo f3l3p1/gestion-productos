@@ -1,0 +1,8 @@
+# Ignorar node_modules y caché de Angular
+node_modules/
+.angular/
+
+# Ignorar archivos generados en la compilación
+dist/
+.vscode/
+*.log
