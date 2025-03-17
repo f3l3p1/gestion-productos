@@ -6,8 +6,8 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-form',
-  standalone: true, 
-  imports: [CommonModule, ReactiveFormsModule], 
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './product-form.component.html'
 })
 export class ProductFormComponent {

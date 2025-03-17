@@ -17,7 +17,7 @@ export class ProductService {
     if (this.isLocalStorageAvailable()) {
       return JSON.parse(localStorage.getItem('products') || '[]');
     }
-    return []; // Si `localStorage` no está disponible, retorna un array vacío.
+    return []; 
   }
 
   private saveProducts(products: Product[]) {
@@ -25,6 +25,11 @@ export class ProductService {
       localStorage.setItem('products', JSON.stringify(products));
     }
     this.products.next(products);
+  }
+
+  // ✅ Método corregido: Obtener lista de productos
+  getProducts(): Product[] {
+    return this.products.value;
   }
 
   addProduct(product: Product) {
@@ -41,6 +46,14 @@ export class ProductService {
 
   deleteProduct(id: number) {
     const products = this.products.value.filter(p => p.id !== id);
+    this.saveProducts(products);
+  }
+
+  // ✅ Método para actualizar estado del producto
+  updateProductStatus(id: number, status: 'inicial' | 'pendiente' | 'completado') {
+    const products = this.products.value.map(p =>
+      p.id === id ? { ...p, status } : p
+    );
     this.saveProducts(products);
   }
 }

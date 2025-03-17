@@ -4,5 +4,4 @@ export interface Product {
     description?: string;
     date: string;
     status: 'inicial' | 'pendiente' | 'completado';
-  }
-  
+}
