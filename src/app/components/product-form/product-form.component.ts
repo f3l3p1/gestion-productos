@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProductService } from '../services/product.service';
-import { Product } from '../models/product';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from '../../services/product.service';
+import { Product } from '../../models/product';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-form',
+  standalone: true, 
+  imports: [CommonModule, ReactiveFormsModule], 
   templateUrl: './product-form.component.html'
 })
 export class ProductFormComponent {

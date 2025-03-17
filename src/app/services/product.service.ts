@@ -7,12 +7,23 @@ export class ProductService {
   private products = new BehaviorSubject<Product[]>(this.loadProducts());
   products$ = this.products.asObservable();
 
+  constructor() {}
+
+  private isLocalStorageAvailable(): boolean {
+    return typeof window !== 'undefined' && !!window.localStorage;
+  }
+
   private loadProducts(): Product[] {
-    return JSON.parse(localStorage.getItem('products') || '[]');
+    if (this.isLocalStorageAvailable()) {
+      return JSON.parse(localStorage.getItem('products') || '[]');
+    }
+    return []; // Si `localStorage` no está disponible, retorna un array vacío.
   }
 
   private saveProducts(products: Product[]) {
-    localStorage.setItem('products', JSON.stringify(products));
+    if (this.isLocalStorageAvailable()) {
+      localStorage.setItem('products', JSON.stringify(products));
+    }
     this.products.next(products);
   }
 
