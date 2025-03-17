@@ -1,0 +1,7 @@
+<!-- product-form.component.html -->
+<form [formGroup]="productForm" (ngSubmit)="submit()">
+    <input type="text" formControlName="name" placeholder="Nombre" required />
+    <input type="date" formControlName="date" required />
+    <button type="submit" class="bg-blue-500 text-white px-4">Agregar</button>
+  </form>
+  
