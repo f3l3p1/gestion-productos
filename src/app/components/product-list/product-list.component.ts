@@ -15,73 +15,59 @@ export class ProductListComponent {
   filteredProducts: Product[] = [];
   selectedStatus: string = ''; 
   searchQuery: string = ''; 
-  editingProduct: Product | null = null; // ✅ Para edición completa
+  editingProduct: Product | null = null; 
 
   constructor(private productService: ProductService) {
-    this.loadProducts();
+    this.productService.products$.subscribe(products => {
+      this.products = products;
+      this.applyFilters();
+    });
   }
 
-  // 🔹 Cargar productos desde el servicio
-  loadProducts() {
-    this.products = this.productService.getProducts();
-    this.applyFilters();
-  }
-
-  // 🔹 Aplicar filtros de búsqueda y estado
   applyFilters() {
     this.filteredProducts = this.products
       .filter(product =>
         this.searchQuery.trim() === '' ||
         product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-        (product.description && product.description.toLowerCase().includes(this.searchQuery.toLowerCase())) // ✅ Filtrar por nombre y descripción
+        (product.description && product.description.toLowerCase().includes(this.searchQuery.toLowerCase()))
       )
       .filter(product => this.selectedStatus === '' || product.status === this.selectedStatus);
   }
 
-  // 🔹 Eliminar producto
   deleteProduct(id: number) {
     if (confirm('¿Eliminar producto?')) {
       this.productService.deleteProduct(id);
-      this.loadProducts();
     }
   }
 
-  // 🔹 Filtrar productos por estado
   filterProducts(event: Event) {
     const target = event.target as HTMLSelectElement;
     this.selectedStatus = target.value;
     this.applyFilters();
   }
 
-  // 🔹 Filtrar productos por búsqueda (nombre + descripción)
   filterByName(event: Event) {
     const target = event.target as HTMLInputElement;
     this.searchQuery = target.value;
     this.applyFilters();
   }
 
-  // 🔹 Cambiar estado del producto
   updateStatus(product: Product, event: Event) {
     const target = event.target as HTMLSelectElement;
     this.productService.updateProductStatus(product.id, target.value as 'inicial' | 'pendiente' | 'completado');
-    this.loadProducts();
   }
 
-  // ✅ Habilitar edición completa
   editProduct(product: Product) {
-    this.editingProduct = { ...product }; // Clona el producto para evitar cambios en tiempo real
+    this.editingProduct = { ...product };
   }
 
-  // ✅ Guardar cambios de edición
   saveEdit() {
     if (this.editingProduct) {
       this.productService.updateProduct(this.editingProduct);
       this.editingProduct = null;
-      this.loadProducts();
     }
   }
 
-  // ✅ Cancelar edición
   cancelEdit() {
     this.editingProduct = null;
   }

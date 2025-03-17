@@ -1,9 +1,9 @@
-<div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-    <h2 class="text-lg font-bold mb-4">Agregar Producto</h2>
+<div class="w-1/2 bg-white shadow-md rounded-md p-6 transform transition duration-300 hover:scale-105">
+    <h2 class="text-2xl font-bold mb-4 text-gray-700">Agregar Producto</h2>
     <form [formGroup]="productForm" (ngSubmit)="submit()" class="flex flex-col gap-4">
         <input type="text" formControlName="name" placeholder="Nombre" class="border rounded p-2" required />
         <input type="text" formControlName="description" placeholder="Descripción" class="border rounded p-2" />
         <input type="date" formControlName="date" class="border rounded p-2" required />
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Agregar</button>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded w-full">Agregar</button>
     </form>
 </div>

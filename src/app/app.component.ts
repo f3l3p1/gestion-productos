@@ -5,7 +5,7 @@ import { ProductListComponent } from './components/product-list/product-list.com
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ProductFormComponent, ProductListComponent],  // 💡 IMPORTA LOS COMPONENTES AQUÍ
+  imports: [ProductFormComponent, ProductListComponent],  
   templateUrl: './app.component.html'
 })
 export class AppComponent {

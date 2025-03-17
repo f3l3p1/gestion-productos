@@ -26,13 +26,13 @@
                   <th class="py-2 px-4 text-left">Descripción</th>
                   <th class="py-2 px-4 text-left">Fecha</th>
                   <th class="py-2 px-4 text-left">Estado</th>
-                  <th class="py-2 px-4 text-left">Acciones</th>
+                  <th class="py-2 px-4 text-left w-40">Acciones</th>
               </tr>
           </thead>
           <tbody>
               <tr *ngFor="let product of filteredProducts" class="border-b hover:bg-gray-100 transition">
                   
-                  <!-- ✅ Edición Completa (Solucionado el error de ngModel) -->
+                  <!--  Edición Completa  -->
                   <td *ngIf="editingProduct && editingProduct.id === product.id" class="py-2 px-4">
                       <input type="text" [(ngModel)]="editingProduct.name" class="border p-1 rounded w-full">
                   </td>
@@ -54,7 +54,7 @@
                       <button class="bg-gray-500 text-white px-3 py-1 rounded hover:bg-gray-600" (click)="cancelEdit()">Cancelar</button>
                   </td>
 
-                  <!-- ✅ Vista Normal -->
+                  <!--  Vista Normal -->
                   <td *ngIf="!editingProduct || editingProduct.id !== product.id" class="py-2 px-4">{{ product.name }}</td>
                   <td *ngIf="!editingProduct || editingProduct.id !== product.id" class="py-2 px-4">{{ product.description || '-' }}</td>
                   <td *ngIf="!editingProduct || editingProduct.id !== product.id" class="py-2 px-4">{{ product.date }}</td>
